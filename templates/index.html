@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Research Agent</title>
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- PDF Export Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <!-- Initial Loading Screen for Model Initialization -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2>Warming up the AI brain...</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="loadingMessage">Starting up...</p>
+        </div>
+    </div>
+
+    <!-- Main Application Wrapper -->
+    <div id="appWrapper" class="app-wrapper" style="display: none;">
+        <!-- Sidebar for Document Management -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-book"></i> Knowledge Base</h2>
+                <button class="btn-icon" id="closeSidebarBtn" aria-label="Close sidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div id="documentsList" class="documents-list">
+                    <!-- Documents will be dynamically loaded here -->
+                </div>
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Add to knowledge base</p>
+                    <small>.pdf, .docx, .txt</small>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf,.docx,.txt" multiple style="display: none;">
+            </div>
+        </aside>
+
+        <!-- Main Chat Interface -->
+        <main class="chat-interface">
+            <header class="chat-header">
+                <div class="header-left">
+                    <button class="btn-icon" id="menuBtn" aria-label="Open sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="header-title">
+                        <h1>Deep Research</h1>
+                        <div class="status-indicator" id="statusIndicator">
+                            <div class="status-dot" id="statusDot"></div>
+                            <span id="statusText">Connecting...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <button class="btn" id="exportPdfBtn">
+                        <i class="fas fa-file-pdf"></i> Export PDF
+                    </button>
+                </div>
+            </header>
+
+            <!-- Chat Message Container -->
+            <div id="chatContainer" class="chat-container">
+                <!-- Chat messages will be appended here -->
+            </div>
+
+            <!-- Message Input Area -->
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <button class="btn-icon" id="uploadBtn" aria-label="Upload document">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <textarea id="queryInput" placeholder="Ask a question about your documents..." rows="1"></textarea>
+                    <button class="btn-icon" id="sendBtn" aria-label="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Main Application Logic -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
